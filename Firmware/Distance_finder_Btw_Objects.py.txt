@@ -1,0 +1,58 @@
+import cv2
+import numpy as np
+
+camera_eye = cv2.VideoCapture(0)
+
+first_point = None
+second_point = None
+pixels_per_centimeter = 25.0 
+
+def pick_points(event, x, y, flags, param):
+    global first_point, second_point
+    if event == cv2.EVENT_LBUTTONDOWN:
+        if first_point is None:
+            first_point = (x, y)
+        elif second_point is None:
+            second_point = (x, y)
+        else:
+            first_point = (x, y)
+            second_point = None
+
+cv2.namedWindow("Aura Measurement")
+cv2.setMouseCallback("Aura Measurement", pick_points)
+
+while True:
+    view_success, frame = camera_eye.read()
+    if not view_success: break
+
+    if first_point:
+        cv2.circle(frame, first_point, 6, (0, 255, 0), -1)
+
+    if first_point and second_point:
+        cv2.circle(frame, second_point, 6, (0, 255, 0), -1)
+        cv2.line(frame, first_point, second_point, (255, 255, 255), 2)
+
+        x_diff = second_point[0] - first_point[0]
+        y_diff = second_point[1] - first_point[1]
+        pixel_gap = np.sqrt(x_diff**2 + y_diff**2)
+
+        real_gap_cm = pixel_gap / pixels_per_centimeter
+        
+        mid_x = (first_point[0] + second_point[0]) // 2
+        mid_y = (first_point[1] + second_point[1]) // 2
+        
+        display_label = f"{real_gap_cm:.2f} cm"
+        cv2.putText(frame, display_label, (mid_x, mid_y - 15),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 255, 255), 2)
+
+    cv2.imshow("Aura Measurement", frame)
+    
+    key_pressed = cv2.waitKey(1) & 0xFF
+    if key_pressed == ord('r'):
+        first_point = None
+        second_point = None
+    elif key_pressed == ord('q'):
+        break
+
+camera_eye.release()
+cv2.destroyAllWindows()
