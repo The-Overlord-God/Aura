@@ -1,52 +1,77 @@
-# 🕶️ Aura Guide: The Modular AI Vision Platform
+# 🕶️ Aura Guide - Modular AI Vision Platform
 
-**Aura Guide** is a wearable, open-source AI platform built for curiosity and education. It transforms the world around you into a playground for data and interaction. 
+Aura Guide is my personal open-source wearable AI platform. The goal is to build smart glasses that help me interact with the real world in natural ways — similar to E.D.I.T.H from Marvel, but built from scratch by me.
 
-Instead of a single-purpose device, Aura Guide is designed with a **Modular Core**—allowing you to switch between different "AI Apps" like object detection, 3D distance finding, and smart-home control with a simple gesture.
-
----
-
-## 💡 Project Status & Learning Journey
-> **Note:** This project is born entirely out of personal interest and a passion for learning.
-
-* **Experimental Nature:** All technical details and designs are collected from extensive online research. I am a self-taught learner, and this project serves as my "Hardware Lab" to turn theoretical knowledge into a physical prototype.
-* **Highly Modular:** This isn't just one gadget; it's a platform. It can be modified for anything from simple distance tracking to complex AI interactions.
-* **Current Research Goals:** I am currently exploring:
-    * **Distance Logic:** Calculating distance from camera-to-object and the distance between two different objects in 3D space using stereo-geometry.
-    * **Gesture Interaction:** Using AI to detect hand pinches to "Pick & Drop" digital images or control a TV via Wi-Fi/IR.
-    * **Theoretical Prototyping:** Learning how to map software logic onto hardware without prior professional experience.
+Instead of making one fixed device, I designed it as a **modular platform** — you can easily switch between different "AI modes" using simple gestures.
 
 ---
 
-## 🛠️ One Device, Many Modes
-The Aura Guide system is built to handle various "Curiosity Projects" in one single frame:
+## 💡 Project Status
 
-### 🏠 1. The Smart Controller (TV & PC Control)
-* **Function:** Point and gesture to control your TV volume or "Pick & Drop" images from your glasses to your PC desktop.
-* **Tech:** Gesture mapping + Wi-Fi Sockets / IR transmission.
+- **Current Stage**: Early prototype / Research + Development phase
+- **Fully Self-taught**: All research, planning, and prototyping is done by me alone as a learning project.
+- **Main Focus Right Now**: Building a working distance finder and gesture system.
 
-### 📏 2. The 3D Tape Measure (Distance Finder)
-* **Function:** Uses stereo-triangulation ($Distance = \frac{f \times B}{d}$) to calculate:
-    1.  The distance between the camera and a target object.
-    2.  The physical distance between two separate objects in the frame.
-* **Tech:** Dual-Eye (CSI0 & CSI1) depth geometry.
+---
 
-### 🎓 3. The Explorer (Educational AI)
-* **Function:** Identifies parts on a circuit board, types of plants, or common objects and displays their names in your HUD.
-* **Tech:** Real-time YOLOv11 object detection.
+## ✨ Key Features (Planned & In Progress)
+
+### 1. 3D Distance Finder (The Smart Tape Measure)
+- Uses two cameras (stereo vision) to calculate real-world distances
+- Can measure distance from user to object **and** distance between two different objects
+- Formula I'm using:  
+  **Distance = (focal length × baseline) / disparity**
+
+### 2. Gesture Control (Smart Controller)
+- Pinch and throw gestures to "pick & drop" content
+- Control TV, PC, laptop, or smart home devices using hand movements
+- Plans to use MediaPipe + Wi-Fi / IR transmission
+
+### 3. Explorer Mode (Educational Assistant)
+- Real-time object and face recognition
+- Can learn new objects/faces on the go
+- Useful for identifying circuit parts, plants, obstacles, etc.
+
+### 4. Helping Assistant for Navigation
+- Audio feedback about surroundings
+- Obstacle detection and guidance (especially useful for visually impaired)
+
+---
+
+## 🛠️ Current Progress
+
+- Working distance measurement prototype (basic stereo vision)
+- Object detection research using lightweight AI models
+- Full Bill of Materials (BOM) prepared — estimated cost around ₹22,000–23,000
+- Gesture logic and modular design planned on paper
+- Hardware frame and camera mounting concepts ready
 
 ---
 
 ## 📊 Bill of Materials (BOM)
-**Total Estimated Build Cost:** ₹22,652.98  
 
-| Component | Role | Unit Price (Est.) |
-| :--- | :--- | :--- |
-| **Raspberry Pi CM5** | The Neural Processor (4GB/16GB) | ₹7,999 |
-| **Waveshare Mini Base (A)** | IO Hub / Camera Connectivity | ₹1,749 |
-| **Dual IMX219 Cameras** | Stereo Vision "Eyes" | ₹3,222 |
-| **Portronics Luxcell 10K** | 22.5W Mobile Power Supply | ₹799 |
-| **Waveshare 3007-B Fan** | Active Thermal Management | ₹299 |
+**Estimated Total Cost: ₹22,653**
+
+| Component                  | Role                              | Approx. Price |
+|---------------------------|-----------------------------------|---------------|
+| Raspberry Pi CM5 (4GB)    | Main AI Brain                     | ₹7,999        |
+| Waveshare Mini Base (A)   | IO + Camera Hub                   | ₹1,749        |
+| Dual IMX219 Cameras       | Stereo Vision Eyes                | ₹3,222        |
+| Portronics Luxcell 10K    | Power Supply                      | ₹799          |
+| Waveshare 3007-B Fan      | Cooling                           | ₹299          |
 
 ---
 
+## 🚀 Future Plans
+
+- Build the physical glasses frame (using 3D printing)
+- Integrate gesture recognition (MediaPipe)
+- Add voice feedback
+- Make the system fully modular so anyone can add new "AI Apps"
+
+This entire project is born from my curiosity and passion for learning hardware + AI. It is my personal "Hardware Lab" where I turn theory into real prototypes.
+
+---
+
+**Made with curiosity by Althaf(The-Overlord-God)**  
+Last updated: March 2026
